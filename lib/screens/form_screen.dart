@@ -75,7 +75,7 @@ class _FormScreenState extends State<FormScreen> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 3,
                           blurRadius: 5,
-                          offset: Offset(3, 3),
+                          offset: const Offset(3, 3),
                         ),
                       ],
                       borderRadius: BorderRadius.circular(25),
@@ -99,7 +99,7 @@ class _FormScreenState extends State<FormScreen> {
                               },
                               keyboardType: TextInputType.name,
                               controller: nameController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 icon: Icon(Icons.task),
                                 hintText: 'Nome',
                                 fillColor: Colors.white70,
@@ -118,7 +118,7 @@ class _FormScreenState extends State<FormScreen> {
                               },
                               keyboardType: TextInputType.number,
                               controller: difficultyController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 icon: Icon(Icons.double_arrow),
                                 hintText: 'Dificuldade',
                                 fillColor: Colors.white70,
@@ -140,7 +140,7 @@ class _FormScreenState extends State<FormScreen> {
                               },
                               keyboardType: TextInputType.url,
                               controller: imageController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 icon: Icon(Icons.image),
                                 hintText: 'Imagem',
                                 fillColor: Colors.white70,
@@ -198,22 +198,22 @@ class _FormScreenState extends State<FormScreen> {
                               imageController.text,
                               int.parse(difficultyController.text));
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Nova tarefa criada!'),
                             ),
                           );
                           Navigator.pop(context);
                         }
                       },
-                      child: Text('ADICIONAR'),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        backgroundColor: Colors.blue,
                         padding:
-                            EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-                        textStyle: TextStyle(
+                            const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        textStyle: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                         elevation: 8,
-                      )),
+                      ),
+                      child: const Text('ADICIONAR')),
                 ),
               ],
             ),

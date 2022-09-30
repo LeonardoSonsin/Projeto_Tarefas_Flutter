@@ -15,10 +15,10 @@ class _InitialScreenState extends State<InitialScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Tarefas'),
-        leading: Icon(Icons.add_task),
+        leading: const Icon(Icons.add_task),
       ),
       body: ListView(
-        padding: EdgeInsets.only(top: 8, bottom: 70),
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
         children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
