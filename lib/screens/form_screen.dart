@@ -1,4 +1,5 @@
-import 'package:alura_flutter_curso_1/data/task_inherited.dart';
+import 'package:alura_flutter_curso_1/components/tasks.dart';
+import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
@@ -193,13 +194,11 @@ class _FormScreenState extends State<FormScreen> {
                   child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          TaskInherited.of(widget.taskContext).newTask(
+                          TaskDao().save(
+                            Task(
                               nameController.text,
                               imageController.text,
-                              int.parse(difficultyController.text));
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Nova tarefa criada!'),
+                              int.parse(difficultyController.text),
                             ),
                           );
                           Navigator.pop(context);
@@ -207,8 +206,8 @@ class _FormScreenState extends State<FormScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
-                        padding:
-                            const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 15),
                         textStyle: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                         elevation: 8,

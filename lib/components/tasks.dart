@@ -1,27 +1,23 @@
 import 'package:alura_flutter_curso_1/components/difficulty.dart';
+import 'package:alura_flutter_curso_1/data/task_dao.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Task extends StatefulWidget {
-  final String nome;
-  final String foto;
-  final int dificuldade;
+  final String name;
+  final String image;
+  final int difficulty;
   int level = 0;
 
-  Task(this.nome, this.foto, this.dificuldade, {Key? key})
-      : super(key: key);
-
-
+  Task(this.name, this.image, this.difficulty, {Key? key}) : super(key: key);
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-
-
   bool assetOrNetwork() {
-    if (widget.foto.contains('http')) {
+    if (widget.image.contains('http')) {
       return false;
     }
     return true;
@@ -31,6 +27,10 @@ class _TaskState extends State<Task> {
     setState(() {
       widget.level++;
     });
+  }
+
+  deleteTask(taskName) {
+    TaskDao().delete(taskName);
   }
 
   @override
@@ -72,13 +72,13 @@ class _TaskState extends State<Task> {
                         borderRadius: BorderRadius.circular(4),
                         child: assetOrNetwork()
                             ? Image.asset(
-                                widget.foto,
+                                widget.image,
                                 height: 100,
                                 width: 72,
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                widget.foto,
+                                widget.image,
                                 height: 100,
                                 width: 72,
                                 fit: BoxFit.cover,
@@ -92,13 +92,12 @@ class _TaskState extends State<Task> {
                         SizedBox(
                           width: 200,
                           child: Text(
-                            widget.nome,
+                            widget.name,
                             style: const TextStyle(
-                                fontSize: 24,
-                                overflow: TextOverflow.ellipsis),
+                                fontSize: 24, overflow: TextOverflow.ellipsis),
                           ),
                         ),
-                        Difficulty(widget.dificuldade),
+                        Difficulty(widget.difficulty),
                         // vai ser um novo componente.
                       ],
                     ),
@@ -108,6 +107,7 @@ class _TaskState extends State<Task> {
                         height: 52,
                         width: 52,
                         child: ElevatedButton(
+                          onLongPress: deleteTask(widget.name),
                           onPressed: levelUp,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -137,8 +137,8 @@ class _TaskState extends State<Task> {
                       width: 200,
                       child: LinearProgressIndicator(
                         color: Colors.white,
-                        value: widget.dificuldade > 0
-                            ? ((widget.level / widget.dificuldade) / 10)
+                        value: widget.difficulty > 0
+                            ? ((widget.level / widget.difficulty) / 10)
                             : 1,
                       ),
                     ),
