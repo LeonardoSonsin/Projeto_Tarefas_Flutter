@@ -23,16 +23,6 @@ class _TaskState extends State<Task> {
     return true;
   }
 
-  void levelUp() {
-    setState(() {
-      widget.level++;
-    });
-  }
-
-  deleteTask(taskName) {
-    TaskDao().delete(taskName);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,8 +97,14 @@ class _TaskState extends State<Task> {
                         height: 52,
                         width: 52,
                         child: ElevatedButton(
-                          onLongPress: deleteTask(widget.name),
-                          onPressed: levelUp,
+                          onLongPress: () {
+                            TaskDao().delete(widget.name);
+                          },
+                          onPressed: () {
+                            setState(() {
+                              widget.level++;
+                            });
+                          },
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.end,

@@ -31,14 +31,9 @@ class TaskDao {
   delete(String taskName) async {
     print('Delete: ');
     final Database database = await getDatabase();
-    var taskExist = await find(taskName);
-    if (taskExist.isNotEmpty) {
-      print('A tarefa foi deletada');
-      return await database
-          .delete(_tablename, where: '$_name = ?', whereArgs: [taskName]);
-    } else {
-      print('A tarefa não foi encontrada');
-    }
+    print('A tarefa foi deletada');
+    return await database
+        .delete(_tablename, where: '$_name = ?', whereArgs: [taskName]);
   }
 
   Map<String, dynamic> toMap(Task task) {
